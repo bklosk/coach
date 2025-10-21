@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Coach
+//  iPad
 //
 //  Created by Ben Klosky on 10/21/25.
 //
