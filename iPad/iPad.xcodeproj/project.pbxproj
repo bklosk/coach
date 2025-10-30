@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D006E9CA2EAC1F1A00CE09C8 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = D006E9C92EAC1F1A00CE09C8 /* Property List.plist */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		D006E9C92EAC1F1A00CE09C8 /* Property List.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
 		D067CFDE2EA83C2B006A3E0B /* iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,6 +37,7 @@
 		D067CFD52EA83C2B006A3E0B = {
 			isa = PBXGroup;
 			children = (
+				D006E9C92EAC1F1A00CE09C8 /* Property List.plist */,
 				D067CFE02EA83C2B006A3E0B /* iPad */,
 				D067CFDF2EA83C2B006A3E0B /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D006E9CA2EAC1F1A00CE09C8 /* Property List.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +263,7 @@
 				DEVELOPMENT_TEAM = 5MF6RB48AZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Property List.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +296,7 @@
 				DEVELOPMENT_TEAM = 5MF6RB48AZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Property List.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
