@@ -1,1 +1,44 @@
 iPad/Property List.plist
+# Next.js (.gitignore for /web)
+web/.next/
+web/out/
+web/node_modules/
+web/.env.local
+web/.env.development
+web/.env.development.local
+web/.env.test.local
+web/.env.production.local
+web/.npm/
+web/.yarn/
+web/.pnp.js
+web/package-lock.json
+web/yarn.lock
+web/.turbo/
+web/.eslintcache
+
+# Python (.gitignore for /services)
+services/**/*.pyc
+services/**/*.pyo
+services/**/__pycache__/
+services/**/.Python
+services/**/env/
+services/**/venv/
+services/**/.env
+services/**/.venv
+services/**/.mypy_cache/
+services/**/.pytest_cache/
+services/**/.coverage
+services/**/.tox/
+services/**/.hypothesis/
+services/**/.DS_Store
+services/**/.ipynb_checkpoints/
+/services/.pytest_cache/
+/services/.mypy_cache/
+/services/.venv
+/services/venv
+/services/env
+/services/.env
+/services/.coverage
+/services/.tox
+/services/.hypothesis
+/services/.DS_Store
