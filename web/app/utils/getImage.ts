@@ -13,11 +13,11 @@ export default async function getImage(): Promise<{ document: File }> {
   const ids = editor.getCurrentPageShapeIds();
   const arr = Array.isArray(ids) ? ids : Array.from(ids ?? []);
   const result = await editor.toImage(arr, {
-    format: "svg",
+    format: "png",
     background: false,
   });
   const blob = result instanceof Blob ? result : result.blob;
   return {
-    document: new File([blob], "canvas.svg", { type: "image/svg+xml" }),
+    document: new File([blob], "canvas.png", { type: "image/png" }),
   };
 }

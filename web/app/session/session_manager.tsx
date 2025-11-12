@@ -113,6 +113,18 @@ export async function createRealtimeSession(): Promise<RealtimeSession> {
   const { document: svgFile } = await getImage();
   await sendImage(svgFile);
 
+  dataChannel.onmessage = async (event) => {
+    if (
+      (JSON.parse(event.data) as { type?: string })?.type ===
+      "input_audio_buffer.speech_started"
+    ) {
+      console.log("Input audio speech started, exporting canvas as SVG");
+      const { document: svgFile } = await getImage();
+      await sendImage(svgFile);
+      console.log("Canvas exported as SVG and sent to OpenAI");
+    }
+  };
+
   const close = () => {
     try {
       dataChannel.close();
