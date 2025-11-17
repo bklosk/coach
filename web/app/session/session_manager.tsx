@@ -109,7 +109,7 @@ export async function createRealtimeSession(): Promise<RealtimeSession> {
     }
   };
 
-  console.log("Exporting canvas as SVG");
+  console.log("Exporting canvas as PNG");
   const { document: svgFile } = await getImage();
   await sendImage(svgFile);
 

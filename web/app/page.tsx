@@ -8,6 +8,7 @@ import {
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Mic } from "lucide-react";
+import Subtitles from "./canvas/subtitles";
 
 export default function Home() {
   const [session, setSession] = useState<RealtimeSession | null>(null);
@@ -35,6 +36,7 @@ export default function Home() {
       >
         <Mic className="w-6 h-6" />
       </motion.button>
+      {session && <Subtitles dataChannel={session.dataChannel} />}
     </main>
   );
 }
