@@ -1,14 +1,60 @@
 "use client";
 
-import { Tldraw } from "tldraw";
+import { Tldraw, Editor } from "tldraw";
 import "tldraw/tldraw.css";
 import { setEditor } from "../utils/editorStore";
+import getImage from "../utils/getImage";
+import { useEffect, useRef, useState } from "react";
+import posthog from "posthog-js";
 
 export default function Canvas() {
+  const [editor, setEditorState] = useState<Editor | null>(null);
+  const isWritingRef = useRef(false);
+
+  //TODO: think carefully about the debounce delay
+  // there should be a 
+  useEffect(() => {
+    if (!editor) return;
+
+    let debounceTimer: NodeJS.Timeout;
+    const STOP_WRITING_DELAY = 1500;
+
+    const cleanupListener = editor.store.listen((entry) => {
+      if (entry.source !== "user" || Object.keys(entry.changes.added).length === 0) return;
+      if (!isWritingRef.current) {
+        posthog.capture("user_started_writing");
+        isWritingRef.current = true;
+        console.log("User started writing/editing", isWritingRef.current);
+      }
+
+      console.log(entry.changes);
+
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        getImage().then((result) => {
+          if ("message" in result) {
+            return;
+          }
+          console.log("User stopped writing/editing", isWritingRef.current, result.document);
+          isWritingRef.current = false;
+          posthog.capture("user_stopped_writing");
+        });
+      }, STOP_WRITING_DELAY);
+    });
+
+    return () => {
+      cleanupListener();
+      clearTimeout(debounceTimer);
+    };
+  }, [editor]);
+
   return (
     <div className="h-full w-full">
       <Tldraw
-        onMount={(editor) => setEditor(editor)}
+        onMount={(editor) => {
+          setEditor(editor);
+          setEditorState(editor);
+        }}
         components={{
           ContextMenu: null,
           ActionsMenu: null,
