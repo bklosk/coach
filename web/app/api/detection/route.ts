@@ -11,7 +11,7 @@ const schema = z.object({
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => ({}));
-  const { document } = body;
+  const { document, problem } = body;
 
 //TODO: get bounding box of the error IF AN ERROR IS DETECTED
 //TODO: get etiology of the error
@@ -24,7 +24,12 @@ export async function POST(request: Request) {
         content: [
           {
             type: "text",
-            text: "Is there a mathematical error in the image? In a very short sentence, describe the error. If no error is detected, the diagnosis must be an empty string.",
+            text: `The student is working on the following problem:
+Problem Statement: ${problem?.problem}
+Problem Type: ${problem?.type}
+Expected Answer: ${problem?.answer}
+
+Is there a mathematical error in the image? In a very short sentence, describe the error. If no error is detected, the diagnosis must be an empty string.`,
           },
           {
             type: "image_url",
@@ -51,4 +56,3 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ ...completion, output_parsed: parsedContent });
 }
-

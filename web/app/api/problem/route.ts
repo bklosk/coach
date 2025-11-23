@@ -34,9 +34,10 @@ export async function GET() {
     }
   }
 
-  const problem = `$${a}x + ${b} = ${c}$`;
-  const solution = `$${x}$`;
+  const problem = `${a}x + ${b} = ${c}`;
+  const answer = `${x}`;
+  const type = "Linear Equation";
 
-  return NextResponse.json({ problem, solution });
+  return NextResponse.json({ problem, type, answer });
 }
 
