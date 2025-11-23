@@ -2,7 +2,7 @@ import "server-only";
 import { OpenAI } from "@posthog/ai";
 import { PostHog } from "posthog-node";
 
-export const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+export const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
 const posthogClient = new PostHog(
   process.env.NEXT_PUBLIC_POSTHOG_KEY || "phc_rlyBBUwJ4Ib4yN0apSWOapQlGHMPfhtsr6twteEPGhd",
@@ -11,8 +11,8 @@ const posthogClient = new PostHog(
   }
 );
 
-export const openai = new OpenAI({
-  apiKey: OPENAI_API_KEY ?? "",
-  posthog: posthogClient,
-});
-
+export const openrouter = new OpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: OPENROUTER_API_KEY ?? "",
+    posthog: posthogClient,
+}); 
