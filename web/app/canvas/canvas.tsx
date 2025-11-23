@@ -10,12 +10,13 @@ interface Problem {
   problem: string;
   type: string;
   answer: string;
+  status: string;
 }
 
-export default function Canvas({problem}: {problem: Problem}) {
+export default function Canvas({problem, onSolved}: {problem: Problem; onSolved: () => void}) {
   const [editor, setEditorState] = useState<Editor | null>(null);
   
-  useCanvasDetection(editor, problem);
+  useCanvasDetection(editor, problem, onSolved);
 
   return (
     <div className="h-full w-full">

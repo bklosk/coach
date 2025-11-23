@@ -6,6 +6,7 @@ import { z } from "zod";
 const schema = z.object({
   error_detected: z.boolean(),
   diagnosis: z.string(),
+  solved: z.boolean(),
   next_step: z.string(),
 });
 
@@ -29,7 +30,7 @@ Problem Statement: ${problem?.problem}
 Problem Type: ${problem?.type}
 Expected Answer: ${problem?.answer}
 
-Is there a mathematical error in the image? In a very short sentence, describe the error. If no error is detected, the diagnosis must be an empty string.`,
+Is there a mathematical error in the image? In a very short sentence, describe the error. If no error is detected, the diagnosis must be an empty string. Identify if the student has solved the problem, even if the form is different from the expected answer.`,
           },
           {
             type: "image_url",

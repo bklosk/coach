@@ -7,13 +7,17 @@ interface Problem {
   problem: string;
   type: string;
   answer: string;
+  status: string;
 }
 
-export function useCanvasDetection(editor: Editor | null, problem: Problem) {
+export function useCanvasDetection(editor: Editor | null, problem: Problem, onSolved: () => void) {
   const isWritingRef = useRef(false);
 
   //TODO: think carefully about the debounce delay
   // the debounce should be the "magic" in this app
+
+  // thought: if there's an in-flight request when the debounce fires, we should cancel it and start a new one
+  // that way we can reduce latency (and the debounce delay) without getting duplicates
   useEffect(() => {
     if (!editor) return;
 
@@ -58,6 +62,9 @@ export function useCanvasDetection(editor: Editor | null, problem: Problem) {
                 console.log("Detection result", data);
                 if (data.output_parsed) {
                   console.log(data.output_parsed.error_detected);
+                  if (data.output_parsed.solved) {
+                    onSolved();
+                  }
                 }
               })
               .catch((e) => {
@@ -72,5 +79,5 @@ export function useCanvasDetection(editor: Editor | null, problem: Problem) {
       cleanupListener();
       clearTimeout(debounceTimer);
     };
-  }, [editor, problem]);
+  }, [editor, problem, onSolved]);
 }

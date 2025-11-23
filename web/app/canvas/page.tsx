@@ -8,6 +8,7 @@ interface Problem {
   problem: string;
   type: string;
   answer: string;
+  status: string;
 }
 
 function CanvasContent() {
@@ -16,15 +17,19 @@ function CanvasContent() {
   useEffect(() => {
     fetch("/api/problem")
       .then((res) => res.json())
-      .then((data) => setProblem(data));
+      .then((data) => setProblem({ ...data, status: "not solved" }));
   }, []);
+
+  const handleProblemSolved = () => {
+    setProblem((prev) => (prev ? { ...prev, status: "solved" } : null));
+  };
 
   return (
     <main className="h-screen w-screen relative">
       {problem && (
         <>
           <Overlay problem={problem} />
-          <Canvas problem={problem} />
+          <Canvas problem={problem} onSolved={handleProblemSolved} />
         </>
       )}
     </main>
